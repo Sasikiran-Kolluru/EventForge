@@ -1,0 +1,12 @@
+{
+  "name": "EventForge (.NET 8)",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm",
+  "forwardPorts": [5080],
+  "portsAttributes": {
+    "5080": {
+      "label": "EventForge web app",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postCreateCommand": "dotnet restore src/EventForge.Web/EventForge.Web.csproj"
+}

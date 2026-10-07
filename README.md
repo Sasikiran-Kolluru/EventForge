@@ -39,6 +39,25 @@ docker compose up --build
 
 Open <http://localhost:8080>. Compose keeps application data in the named `eventforge-data` volume. To stop the app, press Ctrl+C or run `docker compose down`; `docker compose down -v` also deletes the database volume.
 
+## Show a live preview to a GitHub proctor (no separate hosting provider)
+
+GitHub Pages cannot execute this ASP.NET application. If your GitHub account or organization has Codespaces enabled and available quota, Codespaces can provide a temporary browser-accessible demo without a separate hosting provider:
+
+1. Open this repository on GitHub, choose **Code → Codespaces → Create codespace on main**. The `.devcontainer` configuration installs .NET 8.
+2. In the Codespace terminal, set a temporary demo administrator email and your own unique password. Do not put the password in a commit or README:
+
+	```sh
+	export BootstrapAdmin__Email='proctor-demo@example.test'
+	export BootstrapAdmin__Password='Replace-With-A-Unique-Temporary-Password-2026!'
+	```
+
+	Replace the sample password before running; use a value that you have not used on another account.
+3. From the repository root, start the app with `dotnet run --project src/EventForge.Web --urls http://0.0.0.0:5080`.
+4. In the **Ports** panel, find port `5080`, change its visibility to **Public**, and copy the forwarded HTTPS URL. Send that temporary URL—and the temporary demo credentials separately—to the proctor.
+5. Keep the Codespace running during review. Stop/delete it afterward and rotate or discard the demo credentials.
+
+This preview is temporary, not a production deployment: it is only reachable while the Codespace is running, data is stored with the Codespace rather than backed up, and GitHub may require billing details or charge after any included Codespaces quota is used. If Codespaces is unavailable, send the proctor the repository URL and screenshots; a persistent live site needs an app host.
+
 ### Run on your local network
 
 To let another device on the same trusted Wi-Fi/LAN reach a development instance, expose the app on the host network interface (for example, set `ASPNETCORE_URLS=http://0.0.0.0:8080` in the Compose environment), allow that port through the computer's firewall, and visit `http://<host-LAN-IP>:8080` from the other device. Do not expose this development setup directly to the public internet; use a proper cloud deployment with HTTPS instead.
