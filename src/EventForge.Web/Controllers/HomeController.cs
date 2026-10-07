@@ -14,10 +14,16 @@ public class HomeController : Controller
         _dashboardService = dashboardService;
     }
 
-    public async Task<IActionResult> Index(string dateFilter = "This Month")
+    public async Task<IActionResult> Index(string dateFilter = "All Time")
     {
+        var validFilters = new[] { "This Month", "This Year", "All Time" };
+        if (!validFilters.Contains(dateFilter, StringComparer.Ordinal))
+        {
+            dateFilter = "All Time";
+        }
+
         var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "";
-        var role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Manager") ? "Manager" : "Sales Executive";
+        var role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Manager") ? "Manager" : User.IsInRole("Sales Executive") ? "Sales Executive" : "None";
 
         var metrics = await _dashboardService.GetDashboardMetricsAsync(userId, role, dateFilter);
         ViewData["DateFilter"] = dateFilter;

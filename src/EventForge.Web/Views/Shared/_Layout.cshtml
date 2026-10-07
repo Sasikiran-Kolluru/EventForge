@@ -13,15 +13,17 @@
         <a class="brand" asp-controller="Home" asp-action="Index"><span class="brand-icon">E</span><span>EventForge<small>EVENT OPERATIONS</small></span></a>
         <div class="nav-label">WORKSPACE</div>
         <nav>
-            <a asp-controller="Home" asp-action="Index">▦ &nbsp; Overview</a>
-            <a asp-controller="Customers" asp-action="Index">♧ &nbsp; Customers</a>
-            <a asp-controller="Leads" asp-action="Index">↗ &nbsp; Leads</a>
-            <a asp-controller="Opportunities" asp-action="Index">◈ &nbsp; Opportunities</a>
-            <a asp-controller="Events" asp-action="Index">▣ &nbsp; Events</a>
-            <a asp-controller="Vendors" asp-action="Index">◇ &nbsp; Vendors</a>
-            <a asp-controller="FollowUps" asp-action="Index">◷ &nbsp; Follow-ups</a>
+            <a asp-controller="Home" asp-action="Index" data-mobile-icon="▦">▦ &nbsp; Overview</a>
+            <a asp-controller="Customers" asp-action="Index" data-mobile-icon="♧">♧ &nbsp; Customers</a>
+            <a asp-controller="Leads" asp-action="Index" data-mobile-icon="↗">↗ &nbsp; Leads</a>
+            <a asp-controller="Opportunities" asp-action="Index" data-mobile-icon="◈">◈ &nbsp; Opportunities</a>
+            <a asp-controller="Events" asp-action="Index" data-mobile-icon="▣">▣ &nbsp; Events</a>
+            <a asp-controller="Vendors" asp-action="Index" data-mobile-icon="◇">◇ &nbsp; Vendors</a>
+            <a asp-controller="FollowUps" asp-action="Index" data-mobile-icon="◷">◷ &nbsp; Follow-ups</a>
+            <a asp-controller="Activities" asp-action="Index" data-mobile-icon="◎">◎ &nbsp; Activities</a>
+            <a asp-controller="Account" asp-action="ChangePassword" data-mobile-icon="⚙"><span>⚙</span> &nbsp; Change password</a>
         </nav>
-        <div class="side-footer"><div class="user-label">@User.Identity.Name</div><form asp-controller="Account" asp-action="Logout" method="post"><button class="link-button" type="submit">Sign out&nbsp; ↗</button></form></div>
+        <div class="side-footer"><div class="user-label">@User.Identity.Name</div><a class="link-button" asp-controller="Account" asp-action="ChangePassword">Change password</a><form asp-controller="Account" asp-action="Logout" method="post"><button class="link-button" type="submit">Sign out&nbsp; ↗</button></form></div>
     </aside>
     <main class="main"><header class="topbar"><span>EventForge <b>·</b> Workspace</span><span class="date">@DateTime.Now.ToString("dddd, MMMM d")</span></header><section class="content">@RenderBody()</section></main>
 }

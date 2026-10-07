@@ -12,6 +12,6 @@
     <div class="field"><label asp-for="ExpectedGuests">Expected guests</label><input asp-for="ExpectedGuests" class="input" type="number" min="1" /></div>
     <div class="field"><label asp-for="PreferredDate">Preferred event date</label><input asp-for="PreferredDate" class="input" type="date" /></div>
     <div class="field"><label asp-for="Priority">Priority</label><select asp-for="Priority" class="input"><option>Low</option><option>Medium</option><option>High</option></select></div>
-    @if (ViewData["IsEdit"] is true) { <div class="field"><label asp-for="Status">Lead status</label><select asp-for="Status" class="input"><option>New</option><option>Contacted</option><option>Qualified</option><option>Unqualified</option><option>Converted</option><option>Lost</option></select></div> }
+    @if (ViewData["IsEdit"] is true) { <div class="field"><label asp-for="Status">Lead status</label><select asp-for="Status" class="input"><option>New</option><option>Contacted</option><option>Qualified</option><option>Unqualified</option><option>Lost</option></select></div> }
     <div class="field wide"><label asp-for="Requirements">Requirements / notes</label><textarea asp-for="Requirements" class="input" rows="3"></textarea></div>
 </div>

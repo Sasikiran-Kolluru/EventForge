@@ -207,12 +207,26 @@ public class DashboardService : IDashboardService
     public async Task<DashboardViewModel> GetDashboardMetricsAsync(string userId, string role, string dateFilter = "This Month")
     {
         var now = DateTime.UtcNow;
+        var startDate = dateFilter switch
+        {
+            "This Month" => new DateTime(now.Year, now.Month, 1, 0, 0, 0, DateTimeKind.Utc),
+            "This Year" => new DateTime(now.Year, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+            _ => DateTime.MinValue
+        };
 
         var oppQuery = _db.Opportunities.AsQueryable();
         var leadQuery = _db.Leads.AsQueryable();
         var eventQuery = _db.Events.AsQueryable();
         var customerQuery = _db.Customers.AsQueryable();
         var followUpQuery = _db.FollowUps.AsQueryable();
+        if (startDate > DateTime.MinValue)
+        {
+            oppQuery = oppQuery.Where(o => o.CreatedDate >= startDate);
+            leadQuery = leadQuery.Where(l => l.CreatedDate >= startDate);
+            eventQuery = eventQuery.Where(e => e.CreatedDate >= startDate);
+            customerQuery = customerQuery.Where(c => c.CreatedDate >= startDate);
+            followUpQuery = followUpQuery.Where(f => f.FollowUpDate >= startDate);
+        }
 
         if (role == "Sales Executive")
         {
@@ -235,7 +249,7 @@ public class DashboardService : IDashboardService
             TotalPipelineValue = 0,
             WeightedPipelineValue = 0,
 
-            UpcomingEventsCount = await eventQuery.CountAsync(e => e.EventDate >= now.Date && e.Status != "Cancelled"),
+            UpcomingEventsCount = await eventQuery.CountAsync(e => e.EventDate >= now.Date && e.Status != "Cancelled" && e.Status != "Completed"),
             ConfirmedEventsCount = await eventQuery.CountAsync(e => e.Status == "Confirmed"),
             PendingFollowUpsCount = await followUpQuery.CountAsync(f => f.Status == "Planned" && f.FollowUpDate >= now.Date),
 
@@ -248,7 +262,7 @@ public class DashboardService : IDashboardService
         var openOpportunities = opportunities.Where(o => o.Status == "Open").ToList();
         vm.TotalPipelineValue = openOpportunities.Sum(o => o.Amount);
         vm.WeightedPipelineValue = openOpportunities.Sum(o => o.Amount * o.Probability / 100m);
-        vm.PipelineStageBreakdown = opportunities
+        vm.PipelineStageBreakdown = openOpportunities
             .GroupBy(o => o.Stage)
             .ToDictionary(group => group.Key, group => group.Sum(o => o.Amount));
 

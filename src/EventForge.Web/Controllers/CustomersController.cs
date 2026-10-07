@@ -18,7 +18,7 @@ public class CustomersController : Controller
     public async Task<IActionResult> Index(string? search)
     {
         var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "";
-        var role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Manager") ? "Manager" : "Sales Executive";
+        var role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Manager") ? "Manager" : User.IsInRole("Sales Executive") ? "Sales Executive" : "None";
 
         var list = await _customerService.GetCustomersAsync(userId, role, search);
         ViewData["Search"] = search;
@@ -35,7 +35,7 @@ public class CustomersController : Controller
         if (!ModelState.IsValid) return View(customer);
 
         var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "";
-        var role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Manager") ? "Manager" : "Sales Executive";
+        var role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Manager") ? "Manager" : User.IsInRole("Sales Executive") ? "Sales Executive" : "None";
 
         var (success, message, data) = await _customerService.CreateCustomerAsync(customer, userId, role);
         if (!success)
@@ -51,7 +51,7 @@ public class CustomersController : Controller
     public async Task<IActionResult> Details(int id)
     {
         var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "";
-        var role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Manager") ? "Manager" : "Sales Executive";
+        var role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Manager") ? "Manager" : User.IsInRole("Sales Executive") ? "Sales Executive" : "None";
 
         var customer = await _customerService.GetByIdAsync(id, userId, role);
         if (customer == null) return NotFound();
@@ -62,7 +62,7 @@ public class CustomersController : Controller
     public async Task<IActionResult> Edit(int id)
     {
         var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "";
-        var role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Manager") ? "Manager" : "Sales Executive";
+        var role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Manager") ? "Manager" : User.IsInRole("Sales Executive") ? "Sales Executive" : "None";
         var customer = await _customerService.GetByIdAsync(id, userId, role);
         return customer is null ? NotFound() : View(customer);
     }

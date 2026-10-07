@@ -1,11 +1,18 @@
 using EventForge.Web.Data;
 using EventForge.Web.Models;
 using EventForge.Web.Services;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=eventforge.db";
+
+if (Directory.Exists("/data"))
+{
+    builder.Services.AddDataProtection()
+        .PersistKeysToFileSystem(new DirectoryInfo("/data/keys"));
+}
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>

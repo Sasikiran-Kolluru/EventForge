@@ -35,5 +35,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         builder.Entity<FollowUp>().HasIndex(f => f.FollowUpDate);
         builder.Entity<Event>().HasIndex(e => e.EventDate);
         builder.Entity<Event>().HasIndex(e => e.Status);
+        builder.Entity<Activity>().HasIndex(a => a.ActivityDate);
+        builder.Entity<Activity>().HasIndex(a => a.AssignedTo);
+        builder.Entity<AuditLog>().HasIndex(a => a.CreatedDate);
     }
 }

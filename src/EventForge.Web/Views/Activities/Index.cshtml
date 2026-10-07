@@ -1,0 +1,10 @@
+@model IEnumerable<Activity>
+@{
+    ViewData["Title"] = "Activities";
+}
+<div class="heading"><div><div class="eyebrow">RELATIONSHIP HISTORY</div><h1>Activities</h1><p class="muted">A shared record of completed customer conversations and event work.</p></div><a class="button" asp-action="Create">＋ &nbsp; Log activity</a></div>
+@if (TempData["SuccessMessage"] is string success) { <div class="alert">@success</div> }
+<section class="panel"><div style="margin-bottom:15px"><strong style="font:700 13px Manrope,sans-serif">Activity history</strong><div class="panel-note" style="margin-bottom:0">@Model.Count() recorded activities</div></div>
+@if (!Model.Any()) { <div class="empty"><strong>No activities yet</strong>Log a call, meeting, or site visit to build a relationship timeline.</div> }
+else { <div class="table-wrap"><table class="table"><thead><tr><th>Date</th><th>Type</th><th>Subject</th><th>Related to</th><th>Description</th></tr></thead><tbody>@foreach (var item in Model) { var target = item.Customer?.CustomerName ?? item.Lead?.LeadName ?? item.Event?.EventName ?? "—"; <tr><td>@item.ActivityDate.ToString("MMM d, yyyy h:mm tt")</td><td><span class="badge">@item.ActivityType</span></td><td><strong>@item.Subject</strong></td><td>@target</td><td>@(item.Description ?? "—")</td></tr>}</tbody></table></div>}
+</section>

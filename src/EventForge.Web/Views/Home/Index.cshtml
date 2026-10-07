@@ -1,11 +1,11 @@
 @model DashboardViewModel
 @{
     ViewData["Title"] = "Overview";
-    var total = Math.Max(Model.LeadStatusBreakdown.Values.DefaultIfEmpty().Max(), 1);
+    var total = Math.Max(Model.LeadStatusBreakdown.Values.Sum(), 1);
     var stages = Model.PipelineStageBreakdown;
     var maxStage = Math.Max(stages.Values.DefaultIfEmpty().Max(), 1m);
 }
-<div class="heading"><div><div class="eyebrow">YOUR BUSINESS AT A GLANCE</div><h1>Welcome back</h1><p class="muted">Here’s what’s happening across your event business.</p></div><a class="button" asp-controller="Customers" asp-action="Create">＋ &nbsp; Add customer</a></div>
+<div class="heading"><div><div class="eyebrow">YOUR BUSINESS AT A GLANCE</div><h1>Welcome back</h1><p class="muted">Here’s what’s happening across your event business.</p></div><div style="display:flex;gap:8px;align-items:center"><form method="get" asp-action="Index"><select name="dateFilter" class="input" aria-label="Dashboard date range" onchange="this.form.submit()"><option value="This Month" selected="@(ViewData["DateFilter"]?.ToString() == "This Month")">This month</option><option value="This Year" selected="@(ViewData["DateFilter"]?.ToString() == "This Year")">This year</option><option value="All Time" selected="@(ViewData["DateFilter"]?.ToString() == "All Time")">All time</option></select></form><a class="button" asp-controller="Customers" asp-action="Create">＋ &nbsp; Add customer</a></div></div>
 <div class="stats">
     <article class="card"><div class="card-label">Customers</div><div class="card-value">@Model.TotalCustomers</div><div class="card-note">In your workspace</div></article>
     <article class="card"><div class="card-label">Active leads</div><div class="card-value">@Model.OpenLeads</div><div class="card-note">of @Model.TotalLeads total leads</div></article>

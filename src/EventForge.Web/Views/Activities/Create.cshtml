@@ -1,0 +1,14 @@
+@model Activity
+@{
+    ViewData["Title"] = "Log activity";
+}
+<div class="heading"><div><div class="eyebrow">RELATIONSHIP HISTORY</div><h1>Log activity</h1><p class="muted">Record a completed interaction against one customer, lead, or event.</p></div><a class="button light" asp-action="Index">← &nbsp; Activities</a></div>
+<section class="panel form-panel"><form asp-action="Create" method="post"><div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div><div class="form-grid">
+    <div class="field"><label asp-for="ActivityType">Type</label><select asp-for="ActivityType" class="input"><option>Call</option><option>Meeting</option><option>Email</option><option>Venue Visit</option><option>Site Visit</option><option>Other</option></select></div>
+    <div class="field"><label asp-for="ActivityDate">Date and time</label><input asp-for="ActivityDate" asp-format="{0:yyyy-MM-ddTHH:mm}" class="input" type="datetime-local" /><span asp-validation-for="ActivityDate" class="error"></span></div>
+    <div class="field wide"><label asp-for="Subject">Subject</label><input asp-for="Subject" class="input" /><span asp-validation-for="Subject" class="error"></span></div>
+    <div class="field"><label asp-for="CustomerId">Customer (optional)</label><select asp-for="CustomerId" asp-items="ViewBag.Customers" class="input"><option value="">— None —</option></select></div>
+    <div class="field"><label asp-for="LeadId">Lead (optional)</label><select asp-for="LeadId" asp-items="ViewBag.Leads" class="input"><option value="">— None —</option></select></div>
+    <div class="field"><label asp-for="EventId">Event (optional)</label><select asp-for="EventId" asp-items="ViewBag.Events" class="input"><option value="">— None —</option></select></div>
+    <div class="field wide"><label asp-for="Description">Summary / next steps</label><textarea asp-for="Description" class="input" rows="4"></textarea></div>
+</div><div class="form-actions"><button class="button" type="submit">Save activity</button><a class="button light" asp-action="Index">Cancel</a></div></form></section>
