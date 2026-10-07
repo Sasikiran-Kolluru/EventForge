@@ -13,15 +13,15 @@
         <a class="brand" asp-controller="Home" asp-action="Index"><span class="brand-icon">E</span><span>EventForge<small>EVENT OPERATIONS</small></span></a>
         <div class="nav-label">WORKSPACE</div>
         <nav>
-            <a asp-controller="Home" asp-action="Index" data-mobile-icon="▦">▦ &nbsp; Overview</a>
-            <a asp-controller="Customers" asp-action="Index" data-mobile-icon="♧">♧ &nbsp; Customers</a>
-            <a asp-controller="Leads" asp-action="Index" data-mobile-icon="↗">↗ &nbsp; Leads</a>
-            <a asp-controller="Opportunities" asp-action="Index" data-mobile-icon="◈">◈ &nbsp; Opportunities</a>
-            <a asp-controller="Events" asp-action="Index" data-mobile-icon="▣">▣ &nbsp; Events</a>
-            <a asp-controller="Vendors" asp-action="Index" data-mobile-icon="◇">◇ &nbsp; Vendors</a>
-            <a asp-controller="FollowUps" asp-action="Index" data-mobile-icon="◷">◷ &nbsp; Follow-ups</a>
-            <a asp-controller="Activities" asp-action="Index" data-mobile-icon="◎">◎ &nbsp; Activities</a>
-            <a asp-controller="Account" asp-action="ChangePassword" data-mobile-icon="⚙"><span>⚙</span> &nbsp; Change password</a>
+            <a asp-controller="Home" asp-action="Index" data-mobile-icon="▦" aria-label="Overview" title="Overview">▦ &nbsp; Overview</a>
+            <a asp-controller="Customers" asp-action="Index" data-mobile-icon="♧" aria-label="Customers" title="Customers">♧ &nbsp; Customers</a>
+            <a asp-controller="Leads" asp-action="Index" data-mobile-icon="↗" aria-label="Leads" title="Leads">↗ &nbsp; Leads</a>
+            <a asp-controller="Opportunities" asp-action="Index" data-mobile-icon="◈" aria-label="Opportunities" title="Opportunities">◈ &nbsp; Opportunities</a>
+            <a asp-controller="Events" asp-action="Index" data-mobile-icon="▣" aria-label="Events" title="Events">▣ &nbsp; Events</a>
+            <a asp-controller="Vendors" asp-action="Index" data-mobile-icon="◇" aria-label="Vendors" title="Vendors">◇ &nbsp; Vendors</a>
+            <a asp-controller="FollowUps" asp-action="Index" data-mobile-icon="◷" aria-label="Follow-ups" title="Follow-ups">◷ &nbsp; Follow-ups</a>
+            <a asp-controller="Activities" asp-action="Index" data-mobile-icon="◎" aria-label="Activities" title="Activities">◎ &nbsp; Activities</a>
+            <a asp-controller="Account" asp-action="ChangePassword" data-mobile-icon="⚙" aria-label="Change password" title="Change password"><span>⚙</span> &nbsp; Change password</a>
         </nav>
         <div class="side-footer"><div class="user-label">@User.Identity.Name</div><a class="link-button" asp-controller="Account" asp-action="ChangePassword">Change password</a><form asp-controller="Account" asp-action="Logout" method="post"><button class="link-button" type="submit">Sign out&nbsp; ↗</button></form></div>
     </aside>
