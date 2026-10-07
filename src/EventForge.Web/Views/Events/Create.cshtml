@@ -1,0 +1,6 @@
+@model EventForge.Web.Models.Event
+@{
+    ViewData["Title"] = "Add event";
+}
+<div class="heading"><div><div class="eyebrow">EVENT OPERATIONS</div><h1>New event</h1><p class="muted">Set up the details for an upcoming event.</p></div><a class="button light" asp-action="Index">← &nbsp; Events</a></div>
+<section class="panel form-panel"><form asp-action="Create" method="post"><partial name="_Fields" model="Model" /><div class="form-actions"><button class="button" type="submit">Save event</button><a class="button light" asp-action="Index">Cancel</a></div></form></section>

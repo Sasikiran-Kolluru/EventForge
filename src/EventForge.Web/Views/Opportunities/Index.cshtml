@@ -1,0 +1,10 @@
+@model IEnumerable<Opportunity>
+@{
+    ViewData["Title"] = "Opportunities";
+}
+<div class="heading"><div><div class="eyebrow">REVENUE MANAGEMENT</div><h1>Opportunities</h1><p class="muted">Track potential event revenue through every stage.</p></div><a class="button" asp-action="Create">＋ &nbsp; Add opportunity</a></div>
+@if (TempData["SuccessMessage"] is string success) { <div class="alert">@success</div> }
+<section class="panel"><div style="margin-bottom:15px"><strong style="font:700 13px Manrope,sans-serif">Sales pipeline</strong><div class="panel-note" style="margin-bottom:0">@Model.Count() opportunities</div></div>
+@if (!Model.Any()) { <div class="empty"><strong>No opportunities yet</strong>Add a qualified customer opportunity to build your pipeline.</div> }
+else { <div class="table-wrap"><table class="table"><thead><tr><th>Opportunity</th><th>Customer</th><th>Stage</th><th>Amount</th><th>Weighted</th><th>Close date</th><th></th></tr></thead><tbody>@foreach (var item in Model) { <tr><td><strong>@item.OpportunityName</strong></td><td>@item.Customer?.CustomerName</td><td><span class="badge">@item.Stage</span></td><td>@item.Amount.ToString("C0")</td><td>@item.WeightedValue.ToString("C0")</td><td>@item.ExpectedCloseDate.ToString("MMM d, yyyy")</td><td><a asp-action="Edit" asp-route-id="@item.OpportunityId">Edit</a></td></tr>}</tbody></table></div>}
+</section>

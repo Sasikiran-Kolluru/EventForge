@@ -1,0 +1,10 @@
+@model IEnumerable<FollowUp>
+@{
+    ViewData["Title"] = "Follow-ups";
+}
+<div class="heading"><div><div class="eyebrow">CUSTOMER SUCCESS</div><h1>Follow-ups</h1><p class="muted">Keep the next customer conversation from slipping through.</p></div><a class="button" asp-action="Create">＋ &nbsp; Schedule follow-up</a></div>
+@if (TempData["SuccessMessage"] is string success) { <div class="alert">@success</div> }
+<section class="panel"><div style="margin-bottom:15px"><strong style="font:700 13px Manrope,sans-serif">Follow-up schedule</strong><div class="panel-note" style="margin-bottom:0">@Model.Count() scheduled touchpoints</div></div>
+@if (!Model.Any()) { <div class="empty"><strong>No follow-ups scheduled</strong>Schedule your next customer, lead, or event touchpoint.</div> }
+else { <div class="table-wrap"><table class="table"><thead><tr><th>Due</th><th>Type</th><th>Related to</th><th>Remarks</th><th>Status</th><th></th></tr></thead><tbody>@foreach (var item in Model) { var target = item.Customer?.CustomerName ?? item.Lead?.LeadName ?? item.Event?.EventName ?? "—"; <tr><td>@item.FollowUpDate.ToString("MMM d, yyyy")</td><td>@item.FollowUpType</td><td>@target</td><td>@item.Remarks</td><td><span class="badge">@item.Status</span></td><td>@if (item.Status == "Planned") { <form asp-action="Complete" asp-route-id="@item.FollowUpId" method="post"><button class="button light" type="submit">Complete</button></form> }</td></tr>}</tbody></table></div>}
+</section>

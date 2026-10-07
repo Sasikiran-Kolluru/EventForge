@@ -1,0 +1,10 @@
+@model IEnumerable<Vendor>
+@{
+    ViewData["Title"] = "Vendors";
+}
+<div class="heading"><div><div class="eyebrow">PARTNER DIRECTORY</div><h1>Vendors</h1><p class="muted">Keep your event service partners organized and ready.</p></div><a class="button" asp-action="Create">＋ &nbsp; Add vendor</a></div>
+@if (TempData["SuccessMessage"] is string success) { <div class="alert">@success</div> }
+<section class="panel"><div class="tools"><div><strong style="font:700 13px Manrope,sans-serif">Vendor directory</strong><div class="panel-note" style="margin-bottom:0">@Model.Count() vendors</div></div><form class="search" asp-action="Index" method="get"><input class="input" type="search" name="search" value="@ViewData["Search"]" placeholder="Search vendor or category" /><button class="button" type="submit">Search</button></form></div>
+@if (!Model.Any()) { <div class="empty"><strong>No vendors found</strong>Add service providers to start building your partner network.</div> }
+else { <div class="table-wrap"><table class="table"><thead><tr><th>Vendor</th><th>Category</th><th>Contact</th><th>Location</th><th>Rating</th><th>Status</th><th></th></tr></thead><tbody>@foreach (var item in Model) { <tr><td><strong>@item.VendorName</strong><div style="margin-top:4px;color:#98a2b4;font-size:9px">@item.VendorCode</div></td><td>@item.Category</td><td>@item.ContactPerson<div style="margin-top:4px;color:#98a2b4;font-size:9px">@item.Email</div></td><td>@item.City</td><td>@string.Concat(Enumerable.Repeat("★", item.Rating))</td><td><span class="badge">@item.Status</span></td><td><a asp-action="Edit" asp-route-id="@item.VendorId">Edit</a></td></tr>}</tbody></table></div>}
+</section>

@@ -1,0 +1,13 @@
+@model IEnumerable<Customer>
+@{
+    ViewData["Title"] = "Customers";
+}
+<div class="heading"><div><div class="eyebrow">RELATIONSHIP MANAGEMENT</div><h1>Customers</h1><p class="muted">A clear view of the people and businesses behind your events.</p></div><a class="button" asp-action="Create">＋ &nbsp; Add customer</a></div>
+@if (TempData["SuccessMessage"] is string success) { <div class="alert">@success</div> }
+<section class="panel">
+    <div class="tools"><div><strong style="font:700 13px Manrope,sans-serif">Customer directory</strong><div class="panel-note" style="margin-bottom:0">@Model.Count() customer records</div></div><form class="search" asp-action="Index" method="get"><input class="input" type="search" name="search" value="@ViewData["Search"]" placeholder="Search name, email or company" /><button class="button" type="submit">Search</button></form></div>
+    @if (!Model.Any()) { <div class="empty"><strong>No customers found</strong>Add your first customer or try a different search.</div> }
+    else { <div class="table-wrap"><table class="table"><thead><tr><th>Customer</th><th>Company</th><th>Email</th><th>Phone</th><th>Location</th><th>Status</th></tr></thead><tbody>
+        @foreach (var customer in Model) { <tr><td><a asp-action="Details" asp-route-id="@customer.CustomerId">@customer.CustomerName</a><div style="margin-top:4px;color:#98a2b4;font-size:9px">@customer.CustomerCode</div></td><td>@(customer.CompanyName ?? "—")</td><td>@customer.Email</td><td>@customer.Phone</td><td>@(customer.City ?? "—")</td><td><span class="badge">@customer.Status</span></td></tr> }
+    </tbody></table></div> }
+</section>

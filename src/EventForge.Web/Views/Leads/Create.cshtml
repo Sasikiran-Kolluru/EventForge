@@ -1,0 +1,6 @@
+@model Lead
+@{
+    ViewData["Title"] = "Add lead";
+}
+<div class="heading"><div><div class="eyebrow">SALES PIPELINE</div><h1>New lead</h1><p class="muted">Capture an event enquiry and qualify the opportunity.</p></div><a class="button light" asp-action="Index">← &nbsp; All leads</a></div>
+<section class="panel form-panel"><form asp-action="Create" method="post"><partial name="_LeadFields" model="Model" /><div class="form-actions"><button class="button" type="submit">Save lead</button><a class="button light" asp-action="Index">Cancel</a></div></form></section>

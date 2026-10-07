@@ -1,0 +1,20 @@
+# .NET build output
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+
+# Local data and secrets
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.*
+!.env.example
+secrets.json
+
+# IDE / OS
+.idea/
+.DS_Store
+Thumbs.db

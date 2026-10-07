@@ -1,0 +1,12 @@
+@model Opportunity
+<div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+<input asp-for="OpportunityId" type="hidden" />
+<div class="form-grid">
+    <div class="field wide"><label asp-for="OpportunityName">Opportunity name</label><input asp-for="OpportunityName" class="input" /><span asp-validation-for="OpportunityName" class="error"></span></div>
+    <div class="field wide"><label asp-for="CustomerId">Customer</label><select asp-for="CustomerId" asp-items="ViewBag.Customers" class="input"><option value="">Choose a customer</option></select><span asp-validation-for="CustomerId" class="error"></span></div>
+    <div class="field"><label asp-for="Amount">Potential value</label><input asp-for="Amount" class="input" type="number" min="0.01" step="0.01" /><span asp-validation-for="Amount" class="error"></span></div>
+    <div class="field"><label asp-for="Stage">Stage</label><select asp-for="Stage" class="input"><option>Qualification</option><option>Proposal</option><option>Negotiation</option><option>Won</option><option>Lost</option></select></div>
+    <div class="field"><label asp-for="Probability">Win probability (%)</label><input asp-for="Probability" class="input" type="number" min="0" max="100" /><span asp-validation-for="Probability" class="error"></span></div>
+    <div class="field"><label asp-for="ExpectedCloseDate">Expected close date</label><input asp-for="ExpectedCloseDate" class="input" type="date" /><span asp-validation-for="ExpectedCloseDate" class="error"></span></div>
+    <div class="field wide"><label asp-for="Notes">Notes</label><textarea asp-for="Notes" class="input" rows="3"></textarea></div>
+</div>

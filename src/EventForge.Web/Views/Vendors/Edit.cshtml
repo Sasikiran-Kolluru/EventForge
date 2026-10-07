@@ -1,0 +1,7 @@
+@model Vendor
+@{
+    ViewData["Title"] = "Edit vendor";
+    ViewData["IsEdit"] = true;
+}
+<div class="heading"><div><div class="eyebrow">PARTNER DIRECTORY · @Model.VendorCode</div><h1>Edit vendor</h1><p class="muted">Update partner details, category, and status.</p></div><a class="button light" asp-action="Index">← &nbsp; Vendors</a></div>
+<section class="panel form-panel"><form asp-action="Edit" asp-route-id="@Model.VendorId" method="post"><partial name="_Fields" model="Model" /><div class="form-actions"><button class="button" type="submit">Save changes</button><a class="button light" asp-action="Index">Cancel</a></div></form></section>

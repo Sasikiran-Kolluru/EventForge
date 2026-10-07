@@ -1,0 +1,14 @@
+@model Customer
+@{
+    ViewData["Title"] = Model.CustomerName;
+}
+<div class="heading"><div><div class="eyebrow">CUSTOMER DIRECTORY · @Model.CustomerCode</div><h1>@Model.CustomerName</h1><p class="muted">@(Model.CompanyName ?? "Individual customer")</p></div><div style="display:flex;gap:8px"><a class="button light" asp-action="Index">← &nbsp; All customers</a><a class="button" asp-action="Edit" asp-route-id="@Model.CustomerId">Edit customer</a></div></div>
+@if (TempData["SuccessMessage"] is string success) { <div class="alert">@success</div> }
+<section class="panel"><div class="panel-note">CONTACT INFORMATION</div><div class="details">
+    <div><small>Email</small><strong><a href="mailto:@Model.Email">@Model.Email</a></strong></div><div><small>Phone</small><strong><a href="tel:@Model.Phone">@Model.Phone</a></strong></div>
+    <div><small>Company</small><strong>@(Model.CompanyName ?? "—")</strong></div><div><small>Status</small><strong><span class="badge">@Model.Status</span></strong></div>
+    <div><small>Address</small><strong>@(Model.Address ?? "—")</strong></div><div><small>City / region</small><strong>@(Model.City ?? "—") @(Model.State ?? "")</strong></div>
+    <div><small>Customer since</small><strong>@Model.CreatedDate.ToString("MMM d, yyyy")</strong></div><div><small>Opportunities</small><strong>@Model.Opportunities.Count</strong></div>
+</div></section>
+@if (Model.Opportunities.Count > 0) { <section class="panel" style="margin-top:15px"><h2>Opportunities</h2><div class="table-wrap" style="margin-top:13px"><table class="table"><thead><tr><th>Name</th><th>Stage</th><th>Amount</th><th>Expected close</th></tr></thead><tbody>@foreach (var opportunity in Model.Opportunities) { <tr><td>@opportunity.OpportunityName</td><td>@opportunity.Stage</td><td>@opportunity.Amount.ToString("C0")</td><td>@opportunity.ExpectedCloseDate.ToString("MMM d, yyyy")</td></tr> }</tbody></table></div></section> }
+@if (Model.Events.Count > 0) { <section class="panel" style="margin-top:15px"><h2>Events</h2><div class="table-wrap" style="margin-top:13px"><table class="table"><thead><tr><th>Event</th><th>Date</th><th>Venue</th><th>Status</th></tr></thead><tbody>@foreach (var item in Model.Events) { <tr><td>@item.EventName</td><td>@item.EventDate.ToString("MMM d, yyyy")</td><td>@item.Venue</td><td>@item.Status</td></tr> }</tbody></table></div></section> }

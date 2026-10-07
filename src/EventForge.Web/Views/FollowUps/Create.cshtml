@@ -1,0 +1,13 @@
+@model FollowUp
+@{
+    ViewData["Title"] = "Schedule follow-up";
+}
+<div class="heading"><div><div class="eyebrow">CUSTOMER SUCCESS</div><h1>Schedule follow-up</h1><p class="muted">Plan a call or meeting connected to a single customer, lead, or event.</p></div><a class="button light" asp-action="Index">← &nbsp; Follow-ups</a></div>
+<section class="panel form-panel"><form asp-action="Create" method="post"><div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div><div class="form-grid">
+    <div class="field"><label asp-for="FollowUpDate">Date and time</label><input asp-for="FollowUpDate" class="input" type="datetime-local" /><span asp-validation-for="FollowUpDate" class="error"></span></div>
+    <div class="field"><label asp-for="FollowUpType">Type</label><select asp-for="FollowUpType" class="input"><option>Call</option><option>Meeting</option><option>Email</option><option>Site Visit</option></select></div>
+    <div class="field"><label asp-for="CustomerId">Customer (optional)</label><select asp-for="CustomerId" asp-items="ViewBag.Customers" class="input"><option value="">— None —</option></select></div>
+    <div class="field"><label asp-for="LeadId">Lead (optional)</label><select asp-for="LeadId" asp-items="ViewBag.Leads" class="input"><option value="">— None —</option></select></div>
+    <div class="field"><label asp-for="EventId">Event (optional)</label><select asp-for="EventId" asp-items="ViewBag.Events" class="input"><option value="">— None —</option></select></div>
+    <div class="field wide"><label asp-for="Remarks">Agenda / remarks</label><textarea asp-for="Remarks" class="input" rows="3" placeholder="What should this conversation cover?"></textarea></div>
+</div><div class="form-actions"><button class="button" type="submit">Schedule follow-up</button><a class="button light" asp-action="Index">Cancel</a></div></form></section>

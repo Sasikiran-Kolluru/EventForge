@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] · EventForge</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <aside class="sidebar">
+        <a class="brand" asp-controller="Home" asp-action="Index"><span class="brand-icon">E</span><span>EventForge<small>EVENT OPERATIONS</small></span></a>
+        <div class="nav-label">WORKSPACE</div>
+        <nav>
+            <a asp-controller="Home" asp-action="Index">▦ &nbsp; Overview</a>
+            <a asp-controller="Customers" asp-action="Index">♧ &nbsp; Customers</a>
+            <a asp-controller="Leads" asp-action="Index">↗ &nbsp; Leads</a>
+            <a asp-controller="Opportunities" asp-action="Index">◈ &nbsp; Opportunities</a>
+            <a asp-controller="Events" asp-action="Index">▣ &nbsp; Events</a>
+            <a asp-controller="Vendors" asp-action="Index">◇ &nbsp; Vendors</a>
+            <a asp-controller="FollowUps" asp-action="Index">◷ &nbsp; Follow-ups</a>
+        </nav>
+        <div class="side-footer"><div class="user-label">@User.Identity.Name</div><form asp-controller="Account" asp-action="Logout" method="post"><button class="link-button" type="submit">Sign out&nbsp; ↗</button></form></div>
+    </aside>
+    <main class="main"><header class="topbar"><span>EventForge <b>·</b> Workspace</span><span class="date">@DateTime.Now.ToString("dddd, MMMM d")</span></header><section class="content">@RenderBody()</section></main>
+}
+else
+{
+    <main class="auth-layout">@RenderBody()</main>
+}
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,15 @@
+@model EventForge.Web.Models.Event
+<div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+<input asp-for="EventId" type="hidden" />
+<div class="form-grid">
+    <div class="field wide"><label asp-for="EventName">Event name</label><input asp-for="EventName" class="input" /><span asp-validation-for="EventName" class="error"></span></div>
+    <div class="field"><label asp-for="CustomerId">Customer</label><select asp-for="CustomerId" asp-items="ViewBag.Customers" class="input"><option value="">Choose a customer</option></select><span asp-validation-for="CustomerId" class="error"></span></div>
+    <div class="field"><label asp-for="EventType">Event type</label><select asp-for="EventType" class="input"><option>Corporate Conference</option><option>Wedding</option><option>Product Launch</option><option>Private Celebration</option><option>Fundraiser</option><option>Other</option></select></div>
+    <div class="field"><label asp-for="EventDate">Event date</label><input asp-for="EventDate" class="input" type="date" /><span asp-validation-for="EventDate" class="error"></span></div>
+    <div class="field"><label asp-for="ExpectedGuests">Expected guests</label><input asp-for="ExpectedGuests" class="input" type="number" min="1" /><span asp-validation-for="ExpectedGuests" class="error"></span></div>
+    <div class="field"><label asp-for="Venue">Venue</label><input asp-for="Venue" class="input" /><span asp-validation-for="Venue" class="error"></span></div>
+    <div class="field"><label asp-for="City">City</label><input asp-for="City" class="input" /><span asp-validation-for="City" class="error"></span></div>
+    <div class="field"><label asp-for="Budget">Budget</label><input asp-for="Budget" class="input" type="number" min="0" step="0.01" /><span asp-validation-for="Budget" class="error"></span></div>
+    <div class="field"><label asp-for="Status">Status</label><select asp-for="Status" class="input"><option>Planning</option><option>Confirmed</option><option>In Progress</option><option>Completed</option><option>Cancelled</option></select></div>
+    <div class="field wide"><label asp-for="Notes">Notes</label><textarea asp-for="Notes" class="input" rows="3"></textarea></div>
+</div>

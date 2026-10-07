@@ -1,0 +1,6 @@
+@model Vendor
+@{
+    ViewData["Title"] = "Add vendor";
+}
+<div class="heading"><div><div class="eyebrow">PARTNER DIRECTORY</div><h1>New vendor</h1><p class="muted">Add a service provider to your vendor directory.</p></div><a class="button light" asp-action="Index">← &nbsp; Vendors</a></div>
+<section class="panel form-panel"><form asp-action="Create" method="post"><partial name="_Fields" model="Model" /><div class="form-actions"><button class="button" type="submit">Save vendor</button><a class="button light" asp-action="Index">Cancel</a></div></form></section>

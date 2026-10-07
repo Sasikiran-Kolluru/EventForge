@@ -1,0 +1,16 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Sign in";
+}
+<section class="login">
+    <a class="brand" asp-controller="Home" asp-action="Index"><span class="brand-icon">E</span><span style="color:#111c36">EventForge<small>EVENT OPERATIONS</small></span></a>
+    <h1>Welcome back</h1><p>Sign in to manage your events and customers.</p>
+    <form asp-action="Login" method="post">
+        <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+        <div asp-validation-summary="ModelOnly" class="error"></div>
+        <div class="field"><label asp-for="Email">Work email</label><input asp-for="Email" class="input" type="email" autocomplete="username" autofocus /><span asp-validation-for="Email" class="error"></span></div>
+        <div class="field"><label asp-for="Password">Password</label><input asp-for="Password" class="input" autocomplete="current-password" /><span asp-validation-for="Password" class="error"></span></div>
+        <label style="display:flex;align-items:center;gap:7px;margin-top:12px;color:#69768e;font-size:11px"><input asp-for="RememberMe" /> Keep me signed in</label>
+        <button class="button" type="submit">Sign in&nbsp; →</button>
+    </form>
+</section>

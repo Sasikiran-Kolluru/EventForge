@@ -1,0 +1,14 @@
+@model Vendor
+<div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+<input asp-for="VendorId" type="hidden" />
+<div class="form-grid">
+    <div class="field"><label asp-for="VendorName">Vendor name</label><input asp-for="VendorName" class="input" /><span asp-validation-for="VendorName" class="error"></span></div>
+    <div class="field"><label asp-for="Category">Service category</label><select asp-for="Category" class="input"><option>Catering</option><option>Photography</option><option>Decoration</option><option>Audio/Visual</option><option>Venue</option><option>Entertainment</option><option>Transportation</option><option>Other</option></select></div>
+    <div class="field"><label asp-for="ContactPerson">Contact person</label><input asp-for="ContactPerson" class="input" /></div>
+    <div class="field"><label asp-for="City">City</label><input asp-for="City" class="input" /></div>
+    <div class="field"><label asp-for="Email">Email</label><input asp-for="Email" class="input" type="email" /><span asp-validation-for="Email" class="error"></span></div>
+    <div class="field"><label asp-for="Phone">Phone</label><input asp-for="Phone" class="input" type="tel" /><span asp-validation-for="Phone" class="error"></span></div>
+    <div class="field"><label asp-for="Rating">Rating</label><select asp-for="Rating" class="input"><option value="5">5 stars</option><option value="4">4 stars</option><option value="3">3 stars</option><option value="2">2 stars</option><option value="1">1 star</option></select></div>
+    @if (ViewData["IsEdit"] is true) { <div class="field"><label asp-for="Status">Status</label><select asp-for="Status" class="input"><option>Active</option><option>Inactive</option></select></div> }
+    <div class="field wide"><label asp-for="Notes">Notes</label><textarea asp-for="Notes" class="input" rows="3"></textarea></div>
+</div>

@@ -1,0 +1,7 @@
+@model Lead
+@{
+    ViewData["Title"] = "Edit lead";
+    ViewData["IsEdit"] = true;
+}
+<div class="heading"><div><div class="eyebrow">SALES PIPELINE · @Model.LeadCode</div><h1>Edit lead</h1><p class="muted">Update enquiry details and qualification status.</p></div><a class="button light" asp-action="Index">← &nbsp; All leads</a></div>
+<section class="panel form-panel"><form asp-action="Edit" asp-route-id="@Model.LeadId" method="post"><partial name="_LeadFields" model="Model" /><div class="form-actions"><button class="button" type="submit">Save changes</button><a class="button light" asp-action="Index">Cancel</a></div></form></section>

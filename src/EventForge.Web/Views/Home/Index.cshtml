@@ -1,0 +1,31 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Overview";
+    var total = Math.Max(Model.LeadStatusBreakdown.Values.DefaultIfEmpty().Max(), 1);
+    var stages = Model.PipelineStageBreakdown;
+    var maxStage = Math.Max(stages.Values.DefaultIfEmpty().Max(), 1m);
+}
+<div class="heading"><div><div class="eyebrow">YOUR BUSINESS AT A GLANCE</div><h1>Welcome back</h1><p class="muted">Here’s what’s happening across your event business.</p></div><a class="button" asp-controller="Customers" asp-action="Create">＋ &nbsp; Add customer</a></div>
+<div class="stats">
+    <article class="card"><div class="card-label">Customers</div><div class="card-value">@Model.TotalCustomers</div><div class="card-note">In your workspace</div></article>
+    <article class="card"><div class="card-label">Active leads</div><div class="card-value">@Model.OpenLeads</div><div class="card-note">of @Model.TotalLeads total leads</div></article>
+    <article class="card"><div class="card-label">Open pipeline</div><div class="card-value">@Model.TotalPipelineValue.ToString("C0")</div><div class="card-note">Weighted @Model.WeightedPipelineValue.ToString("C0")</div></article>
+    <article class="card"><div class="card-label">Upcoming events</div><div class="card-value">@Model.UpcomingEventsCount</div><div class="card-note">@Model.ConfirmedEventsCount confirmed</div></article>
+</div>
+<div class="grid">
+    <section class="panel"><h2>Lead activity</h2><p class="panel-note">Current leads by status</p>
+        @if (Model.LeadStatusBreakdown.Count == 0) { <div class="empty">No lead activity yet.</div> }
+        else { <div class="bars">@foreach (var item in Model.LeadStatusBreakdown.OrderByDescending(x => x.Value)) { <div class="bar-row"><span>@item.Key</span><div class="track"><div class="fill" style="width:@(Math.Max(item.Value * 100 / total, 8))%"></div></div><strong>@item.Value</strong></div> }</div> }
+    </section>
+    <section class="panel"><h2>Pipeline by stage</h2><p class="panel-note">Open opportunity value</p>
+        @if (stages.Count == 0) { <div class="empty">No opportunities in the pipeline yet.</div> }
+        else { <div class="bars">@foreach (var item in stages.OrderByDescending(x => x.Value)) { <div class="bar-row"><span>@item.Key</span><div class="track"><div class="fill" style="width:@(Math.Max((int)(item.Value * 100 / maxStage), 8))%"></div></div><strong>@item.Value.ToString("C0")</strong></div> }</div> }
+    </section>
+</div>
+<div class="grid">
+    <section class="panel"><h2>Event snapshot</h2><p class="panel-note">@Model.ConfirmedEventsCount confirmed · @Model.UpcomingEventsCount upcoming · @Model.PendingFollowUpsCount follow-ups due</p>
+        @if (Model.EventStatusBreakdown.Count == 0) { <div class="empty">Your event schedule is ready when you are.</div> }
+        else { <div class="bars">@foreach (var item in Model.EventStatusBreakdown.OrderByDescending(x => x.Value)) { <div class="bar-row"><span>@item.Key</span><div class="track"><div class="fill" style="width:@(Math.Max(item.Value * 100 / Math.Max(Model.EventStatusBreakdown.Values.Max(), 1), 8))%"></div></div><strong>@item.Value</strong></div> }</div> }
+    </section>
+    <section class="panel"><h2>Get started</h2><p class="panel-note">Keep customer relationships moving.</p><div class="quicklinks"><a asp-controller="Customers" asp-action="Index">Browse customer directory&nbsp; →</a><a asp-controller="Customers" asp-action="Create">Create a customer record&nbsp; →</a></div></section>
+</div>

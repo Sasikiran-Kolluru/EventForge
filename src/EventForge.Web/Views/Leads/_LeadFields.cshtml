@@ -1,0 +1,17 @@
+@model Lead
+<div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+<input asp-for="LeadId" type="hidden" />
+<div class="form-grid">
+    <div class="field"><label asp-for="LeadName">Contact name</label><input asp-for="LeadName" class="input" /><span asp-validation-for="LeadName" class="error"></span></div>
+    <div class="field"><label asp-for="CompanyName">Company</label><input asp-for="CompanyName" class="input" /></div>
+    <div class="field"><label asp-for="Email">Email</label><input asp-for="Email" class="input" type="email" /><span asp-validation-for="Email" class="error"></span></div>
+    <div class="field"><label asp-for="Phone">Phone</label><input asp-for="Phone" class="input" type="tel" /><span asp-validation-for="Phone" class="error"></span></div>
+    <div class="field"><label asp-for="EventType">Event type</label><select asp-for="EventType" class="input"><option>Corporate Conference</option><option>Wedding</option><option>Product Launch</option><option>Private Celebration</option><option>Fundraiser</option><option>Other</option></select></div>
+    <div class="field"><label asp-for="Source">Lead source</label><select asp-for="Source" class="input"><option>Web Enquiry</option><option>Referral</option><option>Social Media</option><option>Phone</option><option>Other</option></select></div>
+    <div class="field"><label asp-for="Budget">Estimated budget</label><input asp-for="Budget" class="input" type="number" min="0" step="0.01" /><span asp-validation-for="Budget" class="error"></span></div>
+    <div class="field"><label asp-for="ExpectedGuests">Expected guests</label><input asp-for="ExpectedGuests" class="input" type="number" min="1" /></div>
+    <div class="field"><label asp-for="PreferredDate">Preferred event date</label><input asp-for="PreferredDate" class="input" type="date" /></div>
+    <div class="field"><label asp-for="Priority">Priority</label><select asp-for="Priority" class="input"><option>Low</option><option>Medium</option><option>High</option></select></div>
+    @if (ViewData["IsEdit"] is true) { <div class="field"><label asp-for="Status">Lead status</label><select asp-for="Status" class="input"><option>New</option><option>Contacted</option><option>Qualified</option><option>Unqualified</option><option>Converted</option><option>Lost</option></select></div> }
+    <div class="field wide"><label asp-for="Requirements">Requirements / notes</label><textarea asp-for="Requirements" class="input" rows="3"></textarea></div>
+</div>
