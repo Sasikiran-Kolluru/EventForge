@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: eventforge
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    disk:
+      name: eventforge-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://+:8080
+      - key: ASPNETCORE_FORWARDEDHEADERS_ENABLED
+        value: "true"
+      - key: ConnectionStrings__DefaultConnection
+        value: Data Source=/data/eventforge.db
+      - key: BootstrapAdmin__Email
+        value: admin@eventforge.app
+      - key: BootstrapAdmin__Password
+        generateValue: true
